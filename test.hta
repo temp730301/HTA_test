@@ -9,46 +9,46 @@
     />
 </head>
 <body>
-	<input type="button" value="GET" onclick="getJson();" class="btn_get"/>
-	<input type="button" value="SET" onclick="setJson();" class="btn_set"/>
-	<div>
-		<table>
-			<tr><th>name</th><th>value</th></tr>
-			<tr>
-				<td>ITEM_A</td>
-				<td>
-					<select id="itemA">
-					    <option value="0">NONE</option>
-					    <option value="1">AAA</option>
-					    <option value="2">BBB</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>ITEM_B</td>
-				<td>
-					<select id="itemB">
-					    <option value="0">NONE</option>
-					    <option value="1">CCC</option>
-					    <option value="2">DDD</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>ITEM_C</td>
-				<td>
-					<div>
-					<select id="itemC">
-					    <option value="0">NONE</option>
-					    <option value="1">EEE</option>
-					    <option value="2">FFF</option>
-					</select>
-					</div>
-				</td>
-			</tr>
-		</table>
+    <input type="button" value="GET" onclick="getJson();" class="btn_get"/>
+    <input type="button" value="SET" onclick="setJson();" class="btn_set"/>
+    <div>
+        <table>
+            <tr><th>name</th><th>value</th></tr>
+            <tr>
+                <td>ITEM_A</td>
+                <td>
+                    <select id="itemA">
+                        <option value="0">NONE</option>
+                        <option value="1">AAA</option>
+                        <option value="2">BBB</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>ITEM_B</td>
+                <td>
+                    <select id="itemB">
+                        <option value="0">NONE</option>
+                        <option value="1">CCC</option>
+                        <option value="2">DDD</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>ITEM_C</td>
+                <td>
+                    <div>
+                    <select id="itemC">
+                        <option value="0">NONE</option>
+                        <option value="1">EEE</option>
+                        <option value="2">FFF</option>
+                    </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-	</div>
+    </div>
 </body>
 
 <style>
@@ -56,12 +56,17 @@ table table, th, td {
   border-bottom: solid 4px #eee;
 }
 .btn_get {
-  color: #fff;
-  background-color: #0000FF;
+    color: #fff;
+    background-color: #0000FF;
 }
 .btn_set {
-  color: #fff;
-  background-color: #FF0000;
+    color: #fff;
+    background-color: #FF0000;
+}
+select {
+    appearance: none;
+    color: #b20000;
+    border: 0;
 }
 </style>
 
@@ -69,19 +74,19 @@ table table, th, td {
 var decText;
 
 function getJson() {
-	var fs = new ActiveXObject("Scripting.FileSystemObject");
-	var file_r = fs.OpenTextFile("test.json", 1, true);
-	var jsonText = file_r.ReadAll();
-	file_r.close();
-	
-	decText = JSON.parse(jsonText);
+    var fs = new ActiveXObject("Scripting.FileSystemObject");
+    var file_r = fs.OpenTextFile("test.json", 1, true);
+    var jsonText = file_r.ReadAll();
+    file_r.close();
+    
+    decText = JSON.parse(jsonText);
 
     select = document.getElementById('itemA').options;
     for(var i = 0; i < select.length; i++ ){
         if(select[i].value == decText.ITEM_A.value){
             select[i].selected = true;
             break;
-	    }
+        }
     }
 
     select = document.getElementById('itemB').options;
@@ -89,7 +94,7 @@ function getJson() {
         if(select[i].value == decText.ITEM_B.value){
             select[i].selected = true;
             break;
-	    }
+        }
     }
 
     select = document.getElementById('itemC').options;
@@ -97,28 +102,28 @@ function getJson() {
         if(select[i].value == decText.ITEM_C.value){
             select[i].selected = true;
             break;
-	    }
+        }
     }
 
 }
 
 function setJson() {
-	var fs = new ActiveXObject("Scripting.FileSystemObject");
+    var fs = new ActiveXObject("Scripting.FileSystemObject");
 
     var selectVal = document.getElementById('itemA').selectedIndex;
-	decText.ITEM_A.value = selectVal;
+    decText.ITEM_A.value = selectVal;
 
-	selectVal = document.getElementById('itemB').selectedIndex;
-	decText.ITEM_B.value = selectVal;
+    selectVal = document.getElementById('itemB').selectedIndex;
+    decText.ITEM_B.value = selectVal;
 
-	selectVal = document.getElementById('itemC').selectedIndex;
-	decText.ITEM_C.value = selectVal;
+    selectVal = document.getElementById('itemC').selectedIndex;
+    decText.ITEM_C.value = selectVal;
 
-	var encText = JSON.stringify(decText, null, 2);
+    var encText = JSON.stringify(decText, null, 2);
 
-	var file_w = fs.OpenTextFile("test.json", 2, true);
-	file_w.write( encText);
-	file_w.close();
+    var file_w = fs.OpenTextFile("test.json", 2, true);
+    file_w.write( encText);
+    file_w.close();
 }
 
 function windowOnLoad() {
